@@ -1,18 +1,19 @@
 import type { RouteRecordRaw } from "vue-router";
-
+import { ERouterPath } from "@/model/const";
 const routes: RouteRecordRaw[] = [
   {
-    path: "#",
-    redirect: "Home"
+    path: "/#",
+    redirect: { name: ERouterPath.TodoHome }
   },
   {
-    path: "/home",
-    name: "Home",
-    component: () => import("../pages/HomePage.vue")
+    path: `/${ERouterPath.TodoHome}`,
+    name: ERouterPath.TodoHome,
+    component: () => import("../pages/TodoPage/HomeTodo.vue")
   },
   {
-    path: "/about",
-    component: () => import("../pages/AboutPage.vue")
+    path: `/${ERouterPath.InProgress}`,
+    name: ERouterPath.InProgress,
+    component: () => import("../pages/InProgress/InProgress.vue")
   }
 ];
 
