@@ -60,6 +60,7 @@
     ]
   },
   "prettier": {
-    "trailingComma": "none"
+    "trailingComma": "none",
+    "endOfLine": "auto"
   }
 }

@@ -1,5 +1,4 @@
 {
-  "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
@@ -7,9 +6,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*" : ["src/*"]
+      "@/*": ["src/*"]
     },
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "composite": true
   },
-  "include": ["src/**/*.ts", "stc/**/*/*.vue"]
+  "include": ["src/**/*.ts", "src/**/*/*.vue"]
 }
+
