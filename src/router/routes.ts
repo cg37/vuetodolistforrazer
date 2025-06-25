@@ -2,7 +2,7 @@ import type { RouteRecordRaw } from "vue-router";
 import { ERouterPath } from "@/model/const";
 const routes: RouteRecordRaw[] = [
   {
-    path: "/#",
+    path: "/",
     redirect: { name: ERouterPath.TodoHome }
   },
   {
