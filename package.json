@@ -19,6 +19,7 @@
     "lodash": "^4.17.21",
     "path": "^0.12.7",
     "pinia": "^3.0.3",
+    "pinia-plugin-persistedstate": "^4.3.0",
     "rimraf": "^6.0.1",
     "scss": "^0.2.4",
     "typescript": "^5.8.3",

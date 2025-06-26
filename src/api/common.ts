@@ -23,16 +23,16 @@ export const fetchJson = <T>(path: string): Promise<T> => {
           try {
             const parsed = JSON.parse(response.data);
             resolve(parsed);
-          } catch (e) {
-            reject(new Error("Invalid JSON format", e));
+          } catch (err: unknown) {
+            reject(new Error(err as string));
           }
         }
       })
-      .catch((error) => {
+      .catch((err) => {
         // 统一错误处理
-        const errMsg = error.response
-          ? `请求失败: ${error.response.status} ${error.response.statusText}`
-          : error.message || "未知错误";
+        const errMsg = err.response
+          ? `请求失败: ${err.response.status} ${err.response.statusText}`
+          : err.message || "未知错误";
         reject(new Error(errMsg));
       });
   });

@@ -8,6 +8,6 @@ export interface ITodoItem {
   title: string;
   content: string;
   completed: boolean;
-  createdTime: number;
+  id: number;
   imgUrl?: string;
 }
