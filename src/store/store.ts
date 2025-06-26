@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ERouterPath, ITodoItem } from "@/model/const";
+import { ERouterPath, ITodoItem, INewsItem } from "@/model/const";
 import { ref } from "vue";
 import { fetchJson } from "../api/common";
 
@@ -102,4 +102,31 @@ const useTodoStore = defineStore(
     }
   }
 );
+
+export const useNewsStore = defineStore("news", () => {
+  const newsList = ref<INewsItem[]>([]);
+  const loading = ref(false);
+  const error = ref<string | null>(null);
+
+  const loadNews = async () => {
+    loading.value = true;
+    error.value = null;
+    try {
+      const data = await fetchJson<INewsItem[]>("public/news.json");
+      newsList.value = data;
+    } catch (err) {
+      error.value = err instanceof Error ? err.message : "Failed to load news";
+      console.error("Error loading news:", err);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  return {
+    newsList,
+    loading,
+    error,
+    loadNews
+  };
+});
 export { useTabStore, useTodoStore };

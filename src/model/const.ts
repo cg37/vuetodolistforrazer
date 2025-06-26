@@ -11,3 +11,10 @@ export interface ITodoItem {
   id: number;
   imgUrl?: string;
 }
+
+export interface INewsItem {
+  title: string;
+  content: string;
+  id: number;
+  imgUrl?: string;
+}
