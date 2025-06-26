@@ -19,7 +19,7 @@
         <button
           type="button"
           class="btn btn-success"
-          @click="todoStore.invertState(props.createdTime)"
+          @click="todoStore.invertState(props.id)"
         >
           In Progress
         </button>
@@ -29,7 +29,7 @@
         <button
           type="button"
           class="btn btn-primary"
-          @click="todoStore.invertState(props.createdTime)"
+          @click="todoStore.invertState(props.id)"
         >
           Start
         </button>
@@ -47,7 +47,7 @@ interface Props {
   title: string;
   content: string;
   completed: boolean;
-  createdTime: number;
+  id: number;
   imgUrl?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
@@ -55,7 +55,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const createdAt = computed(() => {
-  const dateString = formatDate(props.createdTime);
+  const dateString = formatDate(props.id);
   return `Created At: ${dateString}`;
 });
 </script>
@@ -68,6 +68,10 @@ const createdAt = computed(() => {
   padding: 8px;
   display: flex;
   flex-direction: column;
+
+  transition: all 0.3s ease;
+  will-change: transform, opacity;
+
   .todo-item {
     margin: 12px 8px 0px;
     .item-title {
@@ -104,5 +108,25 @@ const createdAt = computed(() => {
 }
 .btn {
   margin: 0 12px 0 0;
+}
+
+.todo-item-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.todo-item-leave-active {
+  transition: all 0.2s ease-in;
+  position: absolute;
+  width: 100%;
+}
+
+.todo-item-enter-from,
+.todo-item-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.todo-item-move {
+  transition: transform 0.3s ease;
 }
 </style>

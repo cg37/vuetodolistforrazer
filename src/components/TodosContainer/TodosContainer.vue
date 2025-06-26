@@ -7,12 +7,13 @@
 .responseive-container {
   display: grid;
   gap: 24px;
+  margin: 8px 0 0 0;
   height: 100%;
+  width: 100%;
 }
 @media (min-width: 1024px) {
   .responseive-container {
     grid-template-columns: repeat(3, 1fr);
-    margin: 8px 0 0;
   }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
