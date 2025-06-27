@@ -14,7 +14,6 @@ const useTabStore = defineStore("tab", () => {
 
   const setActiveTab = (id: ERouterPath) => {
     activeTabId.value = id;
-    console.log(id);
   };
 
   return { tabs, activeTabId, setActiveTab };
@@ -32,7 +31,7 @@ const useTodoStore = defineStore(
       loading.value = true;
 
       try {
-        const serverTodos = await fetchJson<ITodoItem[]>("public/todos.json");
+        const serverTodos = await fetchJson<ITodoItem[]>("todos.json");
         const serverIds = new Set(serverTodos.map((item) => item.id));
         const localOnly = todos.value.filter(
           (item: ITodoItem) => !serverIds.has(item.id)
@@ -84,6 +83,9 @@ const useTodoStore = defineStore(
       todos.value.unshift(newTodo);
       return newTodo;
     };
+    const deleteTodo = (id: number) => {
+      todos.value = todos.value.filter((item: ITodoItem) => item.id !== id);
+    };
     return {
       todos,
       loading,
@@ -93,7 +95,8 @@ const useTodoStore = defineStore(
       inProgressTodo,
       completedTodo,
       addTodo,
-      sortedTodos
+      sortedTodos,
+      deleteTodo
     };
   },
   {
@@ -112,7 +115,7 @@ export const useNewsStore = defineStore("news", () => {
     loading.value = true;
     error.value = null;
     try {
-      const data = await fetchJson<INewsItem[]>("public/news.json");
+      const data = await fetchJson<INewsItem[]>("news.json");
       newsList.value = data;
     } catch (err) {
       error.value = err instanceof Error ? err.message : "Failed to load news";

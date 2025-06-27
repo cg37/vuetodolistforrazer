@@ -47,27 +47,16 @@
         />
       </template>
     </TodosContainer>
-    <div class="news-title">Company News</div>
-    <NewsContainer>
-      <template v-for="(item, index) of newsStore.newsList" :key="item.id">
-        <NewsItem
-          :title="item.title"
-          :content="item.content"
-          :img-url="item.imgUrl"
-          :index="index"
-        />
-      </template>
-    </NewsContainer>
+    <NewsContainer />
   </div>
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import TodosContainer from "@/components/TodosContainer/TodosContainer.vue";
 import TodoItem from "@/components/TodoItem/TodoItem.vue";
-import { useTodoStore, useNewsStore } from "@/store/store";
+import { useTodoStore } from "@/store/store";
 import Modal from "@/components/NewTodo/NewTodo.vue";
 import NewsContainer from "@/components/NewsContainer/NewsContainer.vue";
-import NewsItem from "@/components/NewsItem/NewsItem.vue";
 
 const newTodoTitle = ref<string>("");
 const newTodoContent = ref<string>("");
@@ -89,17 +78,13 @@ const handleConfirm = () => {
 };
 
 const handleCancel = () => {
-  console.log("用户点击了取消");
+  newTodoTitle.value = "";
+  newTodoContent.value = "";
 };
-
-const newsStore = useNewsStore();
 
 onMounted(() => {
   todoStore.loadTodos().catch((err) => {
     console.error("load todo failed", err);
-  });
-  newsStore.loadNews().catch((err) => {
-    console.error("load news failed", err);
   });
 });
 </script>
@@ -120,7 +105,6 @@ onMounted(() => {
 .news-title {
   font-size: 24px;
   font-weight: 600;
-
   margin: 48px 0 12px;
 }
 </style>

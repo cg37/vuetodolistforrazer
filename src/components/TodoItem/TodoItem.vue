@@ -23,7 +23,13 @@
         >
           In Progress
         </button>
-        <button type="button" class="btn btn-secondary">cancel</button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          @click="todoStore.deleteTodo(props.id)"
+        >
+          cancel
+        </button>
       </template>
       <template v-else>
         <button
@@ -33,7 +39,13 @@
         >
           Start
         </button>
-        <button type="button" class="btn btn-danger">Remove</button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          @click="todoStore.deleteTodo(props.id)"
+        >
+          Remove
+        </button>
       </template>
     </div>
   </div>
