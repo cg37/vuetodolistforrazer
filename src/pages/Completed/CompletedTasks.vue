@@ -11,13 +11,14 @@
         />
       </template>
     </TodosContainer>
+    <NewsContainer />
   </div>
 </template>
 <script lang="ts" setup>
 import TodosContainer from "@/components/TodosContainer/TodosContainer.vue";
 import TodoItem from "@/components/TodoItem/TodoItem.vue";
 import { useTodoStore } from "@/store/store";
-
+import NewsContainer from "@/components/NewsContainer/NewsContainer.vue";
 const todoStore = useTodoStore();
 </script>
 <style lang="scss" scoped>

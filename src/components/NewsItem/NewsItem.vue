@@ -25,6 +25,46 @@ const props = withDefaults(defineProps<Props>(), {
 });
 </script>
 <style lang="scss" scoped>
+@media (min-width: 768px) {
+  .item-container {
+    display: flex;
+    .bg-img {
+      position: relative;
+      height: 200px;
+      width: 100%;
+      overflow: hidden;
+      flex: 1;
+      .centered-image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 100%;
+        max-height: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .news-item {
+      flex: 1;
+      padding: 16px;
+      .item-title {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+      .item-content {
+        font-size: 16px;
+      }
+    }
+  }
+  .item-container:nth-child(odd) {
+    flex-direction: row;
+  }
+  .item-container:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+}
 @media (max-width: 767px) {
   .item-container {
     display: flex;
