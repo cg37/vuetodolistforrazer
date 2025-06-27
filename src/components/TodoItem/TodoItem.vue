@@ -80,10 +80,8 @@ const createdAt = computed(() => {
   padding: 8px;
   display: flex;
   flex-direction: column;
-
   transition: all 0.3s ease;
   will-change: transform, opacity;
-
   .todo-item {
     margin: 12px 8px 0px;
     .item-title {
@@ -94,6 +92,7 @@ const createdAt = computed(() => {
     .item-content {
       font-size: 20px;
       color: #333;
+      overflow: auto;
     }
     flex: 1;
   }
@@ -104,10 +103,10 @@ const createdAt = computed(() => {
 }
 .bg-img {
   width: 100%;
-  height: 60%;
   position: relative; /* 为绝对定位图片提供参照 */
   overflow: hidden; /* 隐藏超出部分 */
   border: 1px solid #ddd; /* 仅用于演示，可移除 */
+  flex: 1;
   .centered-image {
     position: absolute;
     top: 50%;
