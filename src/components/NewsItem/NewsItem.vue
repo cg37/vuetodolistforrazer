@@ -25,12 +25,15 @@ const props = withDefaults(defineProps<Props>(), {
 });
 </script>
 <style lang="scss" scoped>
+.item-container {
+  height: 400px;
+  display: flex;
+}
 @media (min-width: 768px) {
   .item-container {
-    display: flex;
     .bg-img {
       position: relative;
-      height: 200px;
+      height: 100%;
       width: 100%;
       overflow: hidden;
       flex: 1;
@@ -49,12 +52,17 @@ const props = withDefaults(defineProps<Props>(), {
     .news-item {
       flex: 1;
       padding: 16px;
+      display: flex;
+      flex-direction: column;
       .item-title {
         font-size: 24px;
         margin-bottom: 8px;
+        font-weight: 600;
       }
       .item-content {
+        flex: 1;
         font-size: 16px;
+        overflow: auto;
       }
     }
   }
@@ -67,7 +75,6 @@ const props = withDefaults(defineProps<Props>(), {
 }
 @media (max-width: 767px) {
   .item-container {
-    display: flex;
     flex-direction: column;
     height: auto; // 改为自动高度
     .bg-img {
