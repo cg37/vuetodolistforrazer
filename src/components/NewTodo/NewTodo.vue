@@ -6,6 +6,7 @@
     tabindex="-1"
     aria-hidden="true"
     ref="modalElement"
+    role="dialog"
   >
     <div
       class="modal-dialog"

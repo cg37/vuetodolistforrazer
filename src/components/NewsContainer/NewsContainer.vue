@@ -1,15 +1,18 @@
 <template>
-  <div class="news-title">Company News</div>
-  <div class="responseive-container">
-    <template v-for="(item, index) of newsStore.newsList" :key="item.id">
-      <NewsItem
-        :title="item.title"
-        :content="item.content"
-        :img-url="item.imgUrl"
-        :index="index"
-      />
-    </template>
-  </div>
+  <section aria-labelledby="news-heading">
+    <h2 class="news-title">Company News</h2>
+    <div class="responseive-container" role="list">
+      <template v-for="(item, index) of newsStore.newsList" :key="item.id">
+        <NewsItem
+          :title="item.title"
+          :content="item.content"
+          :img-url="item.imgUrl"
+          :index="index"
+          role="listitem"
+        />
+      </template>
+    </div>
+  </section>
 </template>
 <script setup lang="ts">
 import { useNewsStore } from "@/store/store";

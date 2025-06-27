@@ -1,15 +1,15 @@
 <template>
-  <div class="item-container">
-    <div class="bg-img" v-if="props.imgUrl">
+  <article class="item-container" tabindex="0">
+    <div class="bg-img" v-if="props.imgUrl" aria-hidden="true">
       <img :src="props.imgUrl" alt="img" class="centered-image" />
     </div>
     <div class="todo-item">
-      <div class="item-title">
+      <h3 class="item-title">
         {{ props.title }}
-      </div>
-      <div class="item-content">
+      </h3>
+      <p class="item-content">
         {{ props.content }}
-      </div>
+      </p>
       <div class="created">
         {{ createdAt }}
       </div>
@@ -20,12 +20,14 @@
           type="button"
           class="btn btn-success"
           @click="todoStore.invertState(props.id)"
+          aria-label="Mark task as in progress"
         >
           In Progress
         </button>
         <button
           type="button"
           class="btn btn-secondary"
+          aria-label="cancel task"
           @click="todoStore.deleteTodo(props.id)"
         >
           cancel
@@ -35,6 +37,7 @@
         <button
           type="button"
           class="btn btn-primary"
+          aria-label="start task"
           @click="todoStore.invertState(props.id)"
         >
           Start
@@ -42,13 +45,14 @@
         <button
           type="button"
           class="btn btn-danger"
+          aria-label="delete task"
           @click="todoStore.deleteTodo(props.id)"
         >
           Remove
         </button>
       </template>
     </div>
-  </div>
+  </article>
 </template>
 <script setup lang="ts">
 import { computed } from "vue";

@@ -1,5 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark navbar-dark">
+  <nav
+    class="navbar navbar-expand-lg bg-body-tertiary bg-dark navbar-dark"
+    aria-label="Main navigation"
+  >
     <div class="container-fluid --bs-body-bg">
       <a class="navbar-brand" href="#">My Todolist</a>
       <button
@@ -10,6 +13,8 @@
         aria-controls="navbarNav"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        @click="isMenuExpanded = !isMenuExpanded"
+        @keydown.enter="isMenuExpanded = !isMenuExpanded"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -20,8 +25,8 @@
               class="nav-link"
               :class="[tabStore.activeTabId === item.id ? 'active' : '']"
               :to="{ name: item.id }"
-              aria-current="page"
               @click="tabStore.setActiveTab(item.id)"
+              :aria-current="tabStore.activeTabId === item.id ? 'page' : null"
             >
               {{ item.title }}
             </router-link>
@@ -33,19 +38,33 @@
 </template>
 <script lang="ts" setup>
 import { useTabStore } from "@/store/store";
-import { onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min";
 onMounted(() => {
-  // 手动初始化所有 Bootstrap 组件
-  Array.from(document.querySelectorAll('[data-bs-toggle="collapse"]')).forEach(
-    (toggleEl) => {
-      new bootstrap.Collapse(toggleEl, {
-        toggle: false
-      });
-    }
+  // 1. 使用更精准的选择器（避免全局查询）
+  const collapseToggles = document.querySelectorAll<HTMLElement>(
+    '[data-bs-toggle="collapse"]'
   );
+  const collapseInstances: bootstrap.Collapse[] = [];
+
+  // 2. 添加类型注解，并存储实例以便销毁
+  collapseToggles.forEach((toggleEl) => {
+    const targetId = toggleEl.getAttribute("data-bs-target");
+    if (!targetId) return; // 防御性检查
+
+    const instance = new bootstrap.Collapse(toggleEl, {
+      toggle: false
+    });
+    collapseInstances.push(instance);
+  });
+
+  // 3. 组件卸载时销毁实例（避免内存泄漏）
+  onUnmounted(() => {
+    collapseInstances.forEach((instance) => instance.dispose());
+  });
 });
 const tabStore = useTabStore();
+const isMenuExpanded = ref(false);
 </script>
 <style lang="scss" scoped>
 .navbar {
