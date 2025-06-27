@@ -31,8 +31,8 @@ export const fetchJson = <T>(path: string): Promise<T> => {
       .catch((err) => {
         // 统一错误处理
         const errMsg = err.response
-          ? `请求失败: ${err.response.status} ${err.response.statusText}`
-          : err.message || "未知错误";
+          ? `fetch failed: ${err.response.status} ${err.response.statusText}`
+          : err.message || "unknow error";
         reject(new Error(errMsg));
       });
   });
