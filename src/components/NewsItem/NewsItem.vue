@@ -1,6 +1,6 @@
 <template>
-  <div class="item-container">
-    <div class="bg-img" v-if="props.imgUrl">
+  <article class="item-container" tabindex="0">
+    <div class="bg-img" v-if="props.imgUrl" aria-hidden="true">
       <img :src="props.imgUrl" alt="img" class="centered-image" />
     </div>
     <div class="news-item">
@@ -11,7 +11,7 @@
         {{ props.content }}
       </div>
     </div>
-  </div>
+  </article>
 </template>
 <script setup lang="ts">
 interface Props {
